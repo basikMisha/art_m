@@ -4,18 +4,18 @@ import { Link } from "react-router-dom";
 
 interface ArtworkCardProps {
   artwork: Artwork;
-  onFavorite: (artwork: Artwork) => void;
-  isFavorite: boolean;
+  // onFavorite: (artwork: Artwork) => void;
+  // isFavorite: boolean;
 }
 
 const ArtworkCard: React.FC<ArtworkCardProps> = ({
   artwork,
-  onFavorite,
-  isFavorite,
+  // onFavorite,
+  // isFavorite,
 }) => {
   return (
     <div>
-      <Link to={`/artwork/${artwork.id}`}>
+      {/* <Link to={`/artwork/${artwork.id}`}> */}
         <img
           src={`https://www.artic.edu/iiif/2/${artwork.image_id}/full/843,/0/default.jpg`}
           alt={artwork.title}
@@ -27,12 +27,12 @@ const ArtworkCard: React.FC<ArtworkCardProps> = ({
         <button
           onClick={(e) => {
             e.preventDefault();
-            onFavorite(artwork);
+            // onFavorite(artwork);
           }}
         >
-          {isFavorite ? "Remove from fav" : "Add to fav"}
+          {/* {isFavorite ? "Remove from fav" : "Add to fav"} */}
         </button>
-      </Link>
+      {/* </Link> */}
     </div>
   );
 };
