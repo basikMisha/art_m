@@ -41,3 +41,5 @@ export const useFavorites = (): FavoritesContextType => {
   }
   return context;
 };
+
+//git checkout -b feature/add-feature-functionality

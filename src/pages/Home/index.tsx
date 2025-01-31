@@ -5,12 +5,15 @@ import { Artwork, fetchArtworks } from "@/api/index";
 import ArtworkGrid from "@components/ArtworkGrid";
 import Pagination from "@/components/Pagination";
 import Loader from "@/components/Loader";
+import { useFavorites } from "@/context/FavoritesContext";
 
 const Home: React.FC = () => {
   const [artworks, setArtworks] = useState<Artwork[]>([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
+  const { favorites, toggleFavorite } = useFavorites();
+
   useEffect(() => {
     const loadArtworks = async () => {
         setLoading(true);
@@ -34,7 +37,7 @@ const Home: React.FC = () => {
       {loading ? (
         <Loader/>
       ) : (
-        <ArtworkGrid artworks={artworks} />
+        <ArtworkGrid artworks={artworks} onFavorite={toggleFavorite} favorites={favorites} />
       )}
       <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />
       <Footer/>
