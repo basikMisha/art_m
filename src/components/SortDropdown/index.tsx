@@ -6,8 +6,7 @@ interface SortDropdownProps {
 
 const SortDropdown: React.FC<SortDropdownProps> = ({ onSortChange }) => {
   return (
-    <div className="sort-dropdown">
-      <label htmlFor="sort">Sort by: </label>
+    <div>
       <select id="sort" onChange={(e) => onSortChange(e.target.value)}>
         <option value="alphabetical">Alphabetical</option>
         <option value="date">Date</option>
