@@ -10,6 +10,8 @@ interface ArtworkGridProps {
 }
 
 const Grid = styled.div`
+  max-width: 1280px;
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 16px;
