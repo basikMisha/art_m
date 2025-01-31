@@ -13,7 +13,8 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 16px;
-  justify-content: center;
+  justify-items: center;
+  align-items: center;
   padding: 20px;
   margin: 0 auto;
 `;

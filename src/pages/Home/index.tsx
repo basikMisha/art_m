@@ -1,4 +1,6 @@
 import React, { useState, useEffect} from "react";
+import { Footer } from '@components/Footer'
+import { Header } from '@/components/Header'
 import { Artwork, fetchArtworks } from "@/api/index";
 import ArtworkGrid from "@components/ArtworkGrid";
 
@@ -25,12 +27,16 @@ const Home: React.FC = () => {
 
   return (
     <div>
+        <Header/>
+        
       {loading ? (
         <p>Loading...</p>
       ) : (
         <ArtworkGrid artworks={artworks} />
       )}
+      <Footer/>
     </div>
+    
   );
 };
 
