@@ -4,6 +4,7 @@ import { Header } from '@/components/Header'
 import { Artwork, fetchArtworks } from "@/api/index";
 import ArtworkGrid from "@components/ArtworkGrid";
 import Pagination from "@/components/Pagination";
+import Loader from "@/components/Loader";
 
 const Home: React.FC = () => {
   const [artworks, setArtworks] = useState<Artwork[]>([]);
@@ -31,7 +32,7 @@ const Home: React.FC = () => {
         <Header/>
         
       {loading ? (
-        <p>Loading...</p>
+        <Loader/>
       ) : (
         <ArtworkGrid artworks={artworks} />
       )}
