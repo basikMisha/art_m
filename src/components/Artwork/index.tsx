@@ -15,7 +15,7 @@ const ArtworkCard: React.FC<ArtworkCardProps> = ({
 }) => {
   return (
     <div>
-      {/* <Link to={`/artwork/${artwork.id}`}> */}
+      <Link to={`/artwork/${artwork.id}`}>
         <img
           src={`https://www.artic.edu/iiif/2/${artwork.image_id}/full/843,/0/default.jpg`}
           alt={artwork.title}
@@ -32,7 +32,7 @@ const ArtworkCard: React.FC<ArtworkCardProps> = ({
         >
           {/* {isFavorite ? "Remove from fav" : "Add to fav"} */}
         </button>
-      {/* </Link> */}
+      </Link>
     </div>
   );
 };
