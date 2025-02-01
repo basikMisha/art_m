@@ -8,6 +8,7 @@ import { useDebounce } from '@/hooks/useDebounce';
 import SearchForm from '@/components/SearchForm';
 import SortDropdown from '@/components/SortDropdown';
 import OtherArtworksGrid from '@/components/OtherArtworksGrid';
+import SectionTitle from '@/components/Title';
 const Home: React.FC = () => {
   const [artworks, setArtworks] = useState<Artwork[]>([]);
   const [page, setPage] = useState(1);
@@ -73,18 +74,29 @@ const Home: React.FC = () => {
           setPage(1);
         }}
       />
-      <SortDropdown onSortChange={setSortOption} />
+
       {loading ? (
         <Loader />
       ) : (
-        <ArtworkGrid artworks={sortedArtworks} onFavorite={toggleFavorite} favorites={favorites} />
+        <>
+          <SectionTitle subtitle="Topics for you" title="Our special gallery" />
+          <SortDropdown onSortChange={setSortOption} />
+          <ArtworkGrid
+            artworks={sortedArtworks}
+            onFavorite={toggleFavorite}
+            favorites={favorites}
+          />
+        </>
       )}
 
       <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />
       {loading ? (
         <Loader />
       ) : (
-        <OtherArtworksGrid artworks={others} onFavorite={toggleFavorite} favorites={favorites} />
+        <>
+          <SectionTitle subtitle="Here some more" title="Other works for you" />
+          <OtherArtworksGrid artworks={others} onFavorite={toggleFavorite} favorites={favorites} />
+        </>
       )}
     </>
   );
