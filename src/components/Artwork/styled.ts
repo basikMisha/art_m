@@ -76,20 +76,3 @@ export const StyledLink = styled(Link)`
   color: inherit;
   display: block;
 `;
-
-// const FavoriteButton = styled.button<{ isFavorite: boolean }>`
-//   width: 45px;
-//   height: 45px;
-//   border-radius: 50%;
-//   border: none;
-//   background: ${(props) => (props.isFavorite ? "#FDE68A" : "#F3F4F6")}; /* Меняем цвет */
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   cursor: pointer;
-//   transition: background 0.3s ease;
-
-//   &:hover {
-//     background: ${(props) => (props.isFavorite ? "#FDE68A" : "#E5E7EB")};
-//   }
-// `;

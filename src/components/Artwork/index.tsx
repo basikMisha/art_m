@@ -32,7 +32,7 @@ const ArtworkCard: React.FC<ArtworkCardProps> = ({ artwork, onFavorite, isFavori
             <Title>
               {artwork.title.length > 15 ? artwork.title.substring(0, 15) + '...' : artwork.title}
             </Title>
-            <Artist>{artwork.artist_title}</Artist>
+            <Artist>{artwork.artist_title ? artwork.artist_title : 'Unknown'}</Artist>
             <PublicTag>{artwork.is_public_domain ? 'Public' : 'Private'}</PublicTag>
           </Info>
           <FavoriteButton

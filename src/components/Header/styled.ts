@@ -7,8 +7,8 @@ export const StyledHeader = styled.header`
 `;
 
 export const Container = styled.div`
-  padding: 32px 0;
-  max-width: 1280px;
+  padding: 32px 15px;
+  max-width: 1310px;
   width: 100%;
   margin: 0 auto;
   display: flex;
@@ -20,6 +20,9 @@ export const YourFavorites = styled.div`
   display: flex;
   align-items: center;
   gap: 2px;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const StyledSpan = styled.span`
