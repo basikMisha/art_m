@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container, StyledSelect } from './styled';
 
 interface SortDropdownProps {
   onSortChange: (sortOption: string) => void;
@@ -6,12 +7,12 @@ interface SortDropdownProps {
 
 const SortDropdown: React.FC<SortDropdownProps> = ({ onSortChange }) => {
   return (
-    <div>
-      <select id="sort" onChange={(e) => onSortChange(e.target.value)}>
+    <Container>
+      <StyledSelect id="sort" onChange={(e) => onSortChange(e.target.value)}>
         <option value="alphabetical">Alphabetical</option>
         <option value="date">Date</option>
-      </select>
-    </div>
+      </StyledSelect>
+    </Container>
   );
 };
 
