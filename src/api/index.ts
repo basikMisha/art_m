@@ -1,5 +1,11 @@
 const API_URL = 'https://api.artic.edu/api/v1';
 
+const getRandomPage = (min: number, max: number): number => {
+  const randomBuffer = new Uint32Array(1);
+  crypto.getRandomValues(randomBuffer);
+  return min + (randomBuffer[0] % (max - min + 1));
+};
+
 export interface Artwork {
   id: number;
   title: string;
@@ -57,6 +63,30 @@ export const getArtById = async (id: string) => {
     throw new Error('Failed to fetch artwork');
   }
   const data = await response.json();
-  console.log('API Response:', data); // Лог для проверки API
   return data.data;
+};
+
+export const fetchOtherArtworks = async (): Promise<{ data: Artwork[]; totalPages: number }> => {
+  try {
+    const limit = 9;
+    const randPage = getRandomPage(1, 100);
+    const url = new URL(`${API_URL}/artworks`);
+    url.searchParams.append('page', randPage.toString());
+    url.searchParams.append('limit', limit.toString());
+    url.searchParams.append('fields', 'id,title,artist_title,image_id');
+
+    const response = await fetch(url.toString());
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return {
+      data: data.data,
+      totalPages: data.pagination?.total_pages || 1,
+    };
+  } catch (error) {
+    console.error('Error retrieving artworks:', error);
+    return { data: [], totalPages: 1 };
+  }
 };

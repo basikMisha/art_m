@@ -1,17 +1,22 @@
 import React from 'react';
-import ArtworkCard from '@components/Artwork';
+import OtherArtwork from '../OtherArtwork';
 import { Artwork } from '@/api/index';
 import { Grid } from './styled';
-interface ArtworkGridProps {
+interface OtherArtworksGridProps {
   artworks: Artwork[];
   onFavorite: (artwork: Artwork) => void;
   favorites: Artwork[];
 }
-const ArtworkGrid: React.FC<ArtworkGridProps> = ({ artworks, onFavorite, favorites }) => {
+
+const OtherArtworksGrid: React.FC<OtherArtworksGridProps> = ({
+  artworks,
+  onFavorite,
+  favorites,
+}) => {
   return (
     <Grid>
       {artworks.map((artwork) => (
-        <ArtworkCard
+        <OtherArtwork
           key={artwork.id}
           artwork={artwork}
           onFavorite={onFavorite}
@@ -22,4 +27,4 @@ const ArtworkGrid: React.FC<ArtworkGridProps> = ({ artworks, onFavorite, favorit
   );
 };
 
-export default ArtworkGrid;
+export default OtherArtworksGrid;

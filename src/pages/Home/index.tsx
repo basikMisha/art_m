@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Artwork, fetchArtworks } from '@/api/index';
+import { Artwork, fetchArtworks, fetchOtherArtworks } from '@/api/index';
 import ArtworkGrid from '@components/ArtworkGrid';
 import Pagination from '@/components/Pagination';
 import Loader from '@/components/Loader';
@@ -7,6 +7,7 @@ import { useFavorites } from '@/context/FavoritesContext';
 import { useDebounce } from '@/hooks/useDebounce';
 import SearchForm from '@/components/SearchForm';
 import SortDropdown from '@/components/SortDropdown';
+import OtherArtworksGrid from '@/components/OtherArtworksGrid';
 const Home: React.FC = () => {
   const [artworks, setArtworks] = useState<Artwork[]>([]);
   const [page, setPage] = useState(1);
@@ -16,6 +17,23 @@ const Home: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const debouncedSearchQuery = useDebounce(searchQuery, 300);
   const [sortOption, setSortOption] = useState<string>('alphabetical');
+  const [others, setOthers] = useState<Artwork[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const { data, totalPages } = await fetchOtherArtworks();
+        setOthers(data);
+        setTotalPages(totalPages);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [page]);
   useEffect(() => {
     const loadArtworks = async () => {
       setLoading(true);
@@ -61,7 +79,13 @@ const Home: React.FC = () => {
       ) : (
         <ArtworkGrid artworks={sortedArtworks} onFavorite={toggleFavorite} favorites={favorites} />
       )}
+
       <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />
+      {loading ? (
+        <Loader />
+      ) : (
+        <OtherArtworksGrid artworks={others} onFavorite={toggleFavorite} favorites={favorites} />
+      )}
     </>
   );
 };

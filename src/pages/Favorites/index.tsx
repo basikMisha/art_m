@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Artwork } from '@/api/index';
-import ArtworkCard from '@components/Artwork';
-
+import OtherArtworksGrid from '@/components/OtherArtworksGrid';
 const Favorites: React.FC = () => {
   const [favorites, setFavorites] = useState<Artwork[]>([]);
 
@@ -30,16 +29,11 @@ const Favorites: React.FC = () => {
       {favorites.length === 0 ? (
         <p>No favorite artworks yet. Start adding them from the home page!</p>
       ) : (
-        <div className="artwork-list">
-          {favorites.map((artwork) => (
-            <ArtworkCard
-              key={artwork.id}
-              artwork={artwork}
-              onFavorite={handleRemoveFavorite}
-              isFavorite={true}
-            />
-          ))}
-        </div>
+        <OtherArtworksGrid
+          artworks={favorites}
+          onFavorite={handleRemoveFavorite}
+          favorites={favorites}
+        />
       )}
     </>
   );

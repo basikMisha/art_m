@@ -1,5 +1,5 @@
 import { BurgerMenu } from '../BurgerMenu';
-import { StyledHeader, Container, YourFavorites, StyledSpan } from './styled';
+import { StyledHeader, Container, YourFavorites, StyledSpan, StyledLink } from './styled';
 import { Link } from 'react-router-dom';
 export const Header = () => {
   return (
@@ -67,7 +67,7 @@ export const Header = () => {
             </svg>
           </div>
         </Link>
-        <Link to={'/favorites'}>
+        <StyledLink to={'/favorites'}>
           <YourFavorites>
             <div>
               <svg
@@ -88,7 +88,7 @@ export const Header = () => {
             </div>
             <StyledSpan>Your favorites</StyledSpan>
           </YourFavorites>
-        </Link>
+        </StyledLink>
         <BurgerMenu />
       </Container>
     </StyledHeader>
