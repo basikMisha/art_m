@@ -55,7 +55,7 @@ const ArtworkDetails: React.FC = () => {
       />
       <ContentContainer>
         <ArtTitle>{artwork.title}</ArtTitle>
-        <ArtArtist>{artwork.artist_display}</ArtArtist>
+        <ArtArtist>{artwork.artist_title ? artwork.artist_title : 'Unknown'}</ArtArtist>
         <ArtDate>{artwork.date_display}</ArtDate>
 
         <OverviewContainer>
