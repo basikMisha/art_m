@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Artwork } from '@/api/index';
+import { Title, Container } from './styled';
 import OtherArtworksGrid from '@/components/OtherArtworksGrid';
 const Favorites: React.FC = () => {
   const [favorites, setFavorites] = useState<Artwork[]>([]);
@@ -24,8 +25,11 @@ const Favorites: React.FC = () => {
   };
 
   return (
-    <>
-      <h1>Favorite Artworks</h1>
+    <Container>
+      <Title>
+        Here are your
+        <span> favorites</span>
+      </Title>
       {favorites.length === 0 ? (
         <p>No favorite artworks yet. Start adding them from the home page!</p>
       ) : (
@@ -35,7 +39,7 @@ const Favorites: React.FC = () => {
           favorites={favorites}
         />
       )}
-    </>
+    </Container>
   );
 };
 
