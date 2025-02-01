@@ -76,6 +76,9 @@ const ArtworkDetails: React.FC = () => {
             <DescName>Repository:</DescName>
             <DescValue>{artwork.department_title}</DescValue>
           </DescRow>
+          <DescRow>
+            <DescValue>{artwork.is_public_domain ? 'Public' : 'Private'}</DescValue>
+          </DescRow>
         </OverviewContainer>
       </ContentContainer>
     </Container>

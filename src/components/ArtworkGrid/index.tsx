@@ -1,7 +1,7 @@
-import React from "react";
-import ArtworkCard from "@components/Artwork";
-import styled from "styled-components";
-import { Artwork } from "@/api/index";
+import React from 'react';
+import ArtworkCard from '@components/Artwork';
+import styled from 'styled-components';
+import { Artwork } from '@/api/index';
 
 interface ArtworkGridProps {
   artworks: Artwork[];
@@ -14,14 +14,14 @@ const Grid = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 16px;
+  gap: 20px;
   justify-items: center;
   align-items: center;
-  padding: 20px;
+  // padding: 20px;
   margin: 0 auto;
 `;
 
-const ArtworkGrid: React.FC<ArtworkGridProps> = ({ artworks, onFavorite, favorites}) => {
+const ArtworkGrid: React.FC<ArtworkGridProps> = ({ artworks, onFavorite, favorites }) => {
   return (
     <Grid>
       {artworks.map((artwork) => (
