@@ -1,9 +1,9 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import { colors } from '@/constants/colors';
 
 export const StyledHeader = styled.header`
-    width: 100%;
-    background-color: ${colors.black};
+  width: 100%;
+  background-color: ${colors.black};
 `;
 
 export const Container = styled.div`
@@ -14,14 +14,15 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`
+  font-family: Inter;
+`;
 export const YourFavorites = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 2px;
-`
+  display: flex;
+  align-items: center;
+  gap: 2px;
+`;
 
 export const StyledSpan = styled.span`
-    color: ${colors.white};
-    font-size: 18px
-`
+  color: ${colors.white};
+  font-size: 18px;
+`;

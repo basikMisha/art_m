@@ -7,6 +7,10 @@ export interface Artwork {
   artist_display: string;
   image_id: string;
   department_title: string;
+  dimensions: string;
+  credit_line: string;
+  place_of_origin: string;
+  is_public_domain: string;
 }
 
 export const fetchArtworks = async (
@@ -30,7 +34,7 @@ export const fetchArtworks = async (
     }
     const artworksUrl = `${
       API_URL
-    }/artworks?ids=${artworkIds.join(',')}&fields=id,title,date_display,artist_display,image_id`;
+    }/artworks?ids=${artworkIds.join(',')}&fields=id,title,date_display,artist_display,image_id,dimensions,credit_line,place_of_origin,is_public_domain`;
     const artworksResponse = await fetch(artworksUrl);
     if (!artworksResponse.ok) throw new Error('Artworks request failed');
 

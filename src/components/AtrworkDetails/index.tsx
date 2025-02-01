@@ -1,20 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getArtById } from "@/api/index";
-import { Artwork } from "@/api/index";
-import Loader from '../Loader';
-import { Header } from '../Header';
-import { Footer } from '../Footer';
-
+import { getArtById } from '@/api/index';
+import { Artwork } from '@/api/index';
+import Loader from '@components/Loader';
+import {
+  Container,
+  ContentContainer,
+  ArtTitle,
+  ArtArtist,
+  ArtDate,
+  DescTitle,
+  DescName,
+  DescValue,
+  DescRow,
+  OverviewContainer,
+  Image,
+} from './styled';
 const ArtworkDetails: React.FC = () => {
-  const { id } = useParams<{ id: string }>(); // Получение ID картины из URL
+  const { id } = useParams<{ id: string }>();
   const [artwork, setArtwork] = useState<Artwork | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchArtwork = async () => {
-        console.log("Fetching artwork with ID:", id);
+      console.log('Fetching artwork with ID:', id);
       setLoading(true);
       setError(null);
 
@@ -24,6 +34,7 @@ const ArtworkDetails: React.FC = () => {
           setArtwork(data);
         }
       } catch (err) {
+        console.error('Error fetching artwork:', err);
         setError('Failed to load artwork details.');
       } finally {
         setLoading(false);
@@ -33,25 +44,41 @@ const ArtworkDetails: React.FC = () => {
     fetchArtwork();
   }, [id]);
 
-  if (loading) return <Loader/>;
-  if (error) return <p>{error}</p>;
+  if (loading) return <Loader />;
+  if (error) return;
+  <p>{error}</p>;
   if (!artwork) return <p>Artwork not found.</p>;
-
   return (
-    <>
-      <Header/>
-      <h1>{artwork.title}</h1>
-      <p><strong>Artist:</strong> {artwork.artist_display || 'Unknown'}</p>
-      <p><strong>Date:</strong> {artwork.date_display || 'N/A'}</p>
-      <p>Repository: {artwork.department_title}</p>
-      <img
-        src={`https://www.artic.edu/iiif/2/${artwork.image_id}/full/843,/0/default.jpg`}
-        alt={artwork.title || artwork.title}
-        className="artwork-image"
+    <Container>
+      <Image
+        background_url={`https://www.artic.edu/iiif/2/${artwork.image_id}/full/843,/0/default.jpg`}
       />
-      <p><strong>Description:</strong> {artwork.title || 'No description available.'}</p>
-      <Footer/>
-    </>
+      <ContentContainer>
+        <ArtTitle>{artwork.title}</ArtTitle>
+        <ArtArtist>{artwork.artist_display}</ArtArtist>
+        <ArtDate>{artwork.date_display}</ArtDate>
+
+        <OverviewContainer>
+          <DescTitle>Overview</DescTitle>
+          <DescRow>
+            <DescName>Artist nationality:</DescName>
+            <DescValue>{artwork.place_of_origin}</DescValue>
+          </DescRow>
+          <DescRow>
+            <DescName>Dimensions: Sheet:</DescName>
+            <DescValue>{artwork.dimensions}</DescValue>
+          </DescRow>
+          <DescRow>
+            <DescName>Credit Line:</DescName>
+            <DescValue>{artwork.credit_line}</DescValue>
+          </DescRow>
+          <DescRow>
+            <DescName>Repository:</DescName>
+            <DescValue>{artwork.department_title}</DescValue>
+          </DescRow>
+        </OverviewContainer>
+      </ContentContainer>
+    </Container>
   );
 };
 

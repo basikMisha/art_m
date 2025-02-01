@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Footer } from '@components/Footer';
-import { Header } from '@/components/Header';
 import { Artwork, fetchArtworks } from '@/api/index';
 import ArtworkGrid from '@components/ArtworkGrid';
 import Pagination from '@/components/Pagination';
@@ -50,8 +48,7 @@ const Home: React.FC = () => {
   const sortedArtworks = useMemo(() => sortArtworks(artworks, sortOption), [artworks, sortOption]);
 
   return (
-    <div>
-      <Header />
+    <>
       <SearchForm
         onSearch={(query) => {
           setSearchQuery(query);
@@ -65,8 +62,7 @@ const Home: React.FC = () => {
         <ArtworkGrid artworks={sortedArtworks} onFavorite={toggleFavorite} favorites={favorites} />
       )}
       <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />
-      <Footer />
-    </div>
+    </>
   );
 };
 
