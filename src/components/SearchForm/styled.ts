@@ -69,7 +69,7 @@ export const SearchButton = styled.button`
 export const SearchIcon = styled.svg`
   width: 32px;
   height: 32px;
-  stroke: currentColor;
+  stroke: ${colors.black};
   fill: none;
-  color: ${colors.black}; /* Можно заменить на нужный цвет */
+  color: ${colors.black};
 `;
