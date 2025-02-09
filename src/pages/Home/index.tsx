@@ -16,7 +16,7 @@ const Home: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const { favorites, toggleFavorite } = useFavorites();
   const [searchQuery, setSearchQuery] = useState('');
-  const debouncedSearchQuery = useDebounce(searchQuery, 300);
+  const debouncedSearchQuery = useDebounce(searchQuery, 1000);
   const [sortOption, setSortOption] = useState<string>('alphabetical');
   const [others, setOthers] = useState<Artwork[]>([]);
   useEffect(() => {
