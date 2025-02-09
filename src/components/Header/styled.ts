@@ -16,7 +16,8 @@ export const Container = styled.div`
   align-items: center;
   font-family: Inter;
 `;
-export const YourFavorites = styled.div`
+
+export const LinkWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 2px;
@@ -29,8 +30,15 @@ export const StyledSpan = styled.span`
   color: ${colors.white};
   font-size: 18px;
 `;
+
 export const StyledLink = styled(Link)`
   text-decoration: none;
   color: inherit;
   display: block;
+`;
+
+export const LinksContainer = styled.div`
+  display: flex;
+  gap: 16px;
+  align-items: center;
 `;
