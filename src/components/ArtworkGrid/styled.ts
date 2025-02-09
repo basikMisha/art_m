@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Grid = styled.div`
+export const Grid = styled.div<{ minHeight: number }>`
   max-width: 1280px;
   width: 100%;
   display: grid;
@@ -9,4 +9,5 @@ export const Grid = styled.div`
   justify-items: center;
   align-items: center;
   margin: 0 auto;
+  min-height: ${({ minHeight }) => (minHeight > 0 ? `${minHeight}px` : '400px')};
 `;
