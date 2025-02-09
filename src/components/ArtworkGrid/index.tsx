@@ -6,10 +6,16 @@ interface ArtworkGridProps {
   artworks: Artwork[];
   onFavorite: (artwork: Artwork) => void;
   favorites: Artwork[];
+  minHeight: number;
 }
-const ArtworkGrid: React.FC<ArtworkGridProps> = ({ artworks, onFavorite, favorites }) => {
+const ArtworkGrid: React.FC<ArtworkGridProps & { minHeight: number }> = ({
+  artworks,
+  onFavorite,
+  favorites,
+  minHeight,
+}) => {
   return (
-    <Grid>
+    <Grid id="artwork-grid" minHeight={minHeight}>
       {artworks.map((artwork) => (
         <ArtworkCard
           key={artwork.id}

@@ -1,18 +1,18 @@
-import styled from 'styled-components'
-import { colors } from '@/constants/colors'
+import styled from 'styled-components';
+import { colors } from '@/constants/colors';
 
 export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  height: 400px;
   margin: 100px 0;
-`
+  min-height: 100%;
+`;
 
 export const LoaderStyled = styled.div`
   display: flex;
   gap: 1rem;
-
   div {
     width: 1.5rem;
     height: 1.5rem;
@@ -30,7 +30,8 @@ export const LoaderStyled = styled.div`
   }
 
   @keyframes pulse {
-    0%, 100% {
+    0%,
+    100% {
       transform: scale(1);
       opacity: 0.6;
     }
@@ -39,4 +40,4 @@ export const LoaderStyled = styled.div`
       opacity: 1;
     }
   }
-`
+`;
