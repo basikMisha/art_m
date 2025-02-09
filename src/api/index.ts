@@ -1,6 +1,6 @@
 const API_URL = 'https://api.artic.edu/api/v1';
 
-const getRandomPage = (min: number, max: number): number => {
+export const getRandomPage = (min: number, max: number): number => {
   const randomBuffer = new Uint32Array(1);
   crypto.getRandomValues(randomBuffer);
   return min + (randomBuffer[0] % (max - min + 1));
