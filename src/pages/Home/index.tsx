@@ -19,6 +19,15 @@ const Home: React.FC = () => {
   const debouncedSearchQuery = useDebounce(searchQuery, 1000);
   const [sortOption, setSortOption] = useState<string>('alphabetical');
   const [others, setOthers] = useState<Artwork[]>([]);
+  const [gridHeight, setGridHeight] = useState(0);
+  useEffect(() => {
+    if (artworks.length > 0) {
+      const gridElement = document.getElementById('artwork-grid');
+      if (gridElement) {
+        setGridHeight(gridElement.clientHeight); // Сохраняем текущую высоту
+      }
+    }
+  }, [page]);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -82,6 +91,7 @@ const Home: React.FC = () => {
           <SectionTitle subtitle="Topics for you" title="Our special gallery" />
           <SortDropdown onSortChange={setSortOption} />
           <ArtworkGrid
+            minHeight={gridHeight}
             artworks={sortedArtworks}
             onFavorite={toggleFavorite}
             favorites={favorites}
