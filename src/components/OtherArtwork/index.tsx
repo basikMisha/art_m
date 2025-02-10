@@ -1,5 +1,5 @@
 import React from 'react';
-import { Artwork } from '@/api/index';
+import { Artwork } from '@/types/Artwork';
 import {
   Card,
   StyledLink,

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Artwork } from '@/api/index';
+import { Artwork } from '@/types/Artwork';
 import { Title, Container } from './styled';
 import OtherArtworksGrid from '@/components/OtherArtworksGrid';
 const Favorites: React.FC = () => {

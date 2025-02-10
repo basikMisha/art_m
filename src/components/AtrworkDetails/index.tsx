@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getArtById } from '@/api/index';
-import { Artwork } from '@/api/index';
+import { Artwork } from '@/types/Artwork';
 import Loader from '@components/Loader';
 import {
   Container,

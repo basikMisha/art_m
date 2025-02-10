@@ -1,6 +1,6 @@
 import React from 'react';
 import ArtworkCard from '@components/Artwork';
-import { Artwork } from '@/api/index';
+import { Artwork } from '@/types/Artwork';
 import { Grid } from './styled';
 interface ArtworkGridProps {
   artworks: Artwork[];

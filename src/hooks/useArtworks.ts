@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { fetchArtworks, Artwork } from '@/api/index';
+import { fetchArtworks } from '@/api/index';
 import { useDebounce } from '@/hooks/useDebounce';
-
+import { Artwork } from '@/types/Artwork';
 export const useArtworks = (page: number, searchQuery: string) => {
   const [artworks, setArtworks] = useState<Artwork[]>([]);
   const [totalPages, setTotalPages] = useState(1);
