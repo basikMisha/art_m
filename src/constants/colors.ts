@@ -8,6 +8,7 @@ export const colors = {
   gray: 'rgba(249, 249, 249, 1)',
   search: 'rgba(57, 57, 57, 0.05)',
   errorText: 'rgba(255, 0, 0, 1)',
+  errorBg: 'rgba(231, 76, 60, 1)',
   boxShadow: 'rgba(0, 0, 0, 0.1)',
   paginationHoverNotActive: 'rgba(187, 187, 187, 1)',
   paginationNotActive: 'rgba(221, 221, 221, 1)',
