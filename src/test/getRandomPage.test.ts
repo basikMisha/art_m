@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { getRandomPage } from '@/api';
+import { getRandomPage } from '@/utils/getRandomPage';
 
 describe('getRandomPage', () => {
   it('returns the number within min and max', () => {

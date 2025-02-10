@@ -1,31 +1,19 @@
-const API_URL = 'https://api.artic.edu/api/v1';
-
-export const getRandomPage = (min: number, max: number): number => {
-  const randomBuffer = new Uint32Array(1);
-  crypto.getRandomValues(randomBuffer);
-  return min + (randomBuffer[0] % (max - min + 1));
-};
-
-export interface Artwork {
-  id: number;
-  title: string;
-  date_display: string;
-  artist_display: string;
-  image_id: string;
-  department_title: string;
-  dimensions: string;
-  credit_line: string;
-  place_of_origin: string;
-  is_public_domain: boolean;
-  artist_title: string;
-}
+import { getRandomPage } from '@/utils/getRandomPage';
+import {
+  API_URL,
+  PAGE_NUMBER,
+  ARTS_FOR_PAGE,
+  ARTS_FOR_OTHERS,
+  MAX_RANDOM_PAGE,
+} from '@/constants/api';
+import { Artwork } from '@/types/Artwork';
 
 export const fetchArtworks = async (
-  page: number = 1,
+  page: number = PAGE_NUMBER,
   searchQuery: string = ''
 ): Promise<{ data: Artwork[]; totalPages: number }> => {
   try {
-    const limit = 4;
+    const limit = ARTS_FOR_PAGE;
     const searchUrl = `${API_URL}/artworks/search?q=${encodeURIComponent(
       searchQuery
     )}&page=${page}&limit=${limit}&fields=id`;
@@ -49,11 +37,11 @@ export const fetchArtworks = async (
 
     return {
       data: artworksData.data,
-      totalPages: searchData.pagination?.total_pages || 1,
+      totalPages: searchData.pagination?.total_pages || PAGE_NUMBER,
     };
   } catch (error) {
     console.error(error);
-    return { data: [], totalPages: 1 };
+    return { data: [], totalPages: PAGE_NUMBER };
   }
 };
 
@@ -68,8 +56,8 @@ export const getArtById = async (id: string) => {
 
 export const fetchOtherArtworks = async (): Promise<{ data: Artwork[]; totalPages: number }> => {
   try {
-    const limit = 9;
-    const randPage = getRandomPage(1, 100);
+    const limit = ARTS_FOR_OTHERS;
+    const randPage = getRandomPage(PAGE_NUMBER, MAX_RANDOM_PAGE);
     const url = new URL(`${API_URL}/artworks`);
     url.searchParams.append('page', randPage.toString());
     url.searchParams.append('limit', limit.toString());
@@ -83,10 +71,10 @@ export const fetchOtherArtworks = async (): Promise<{ data: Artwork[]; totalPage
     const data = await response.json();
     return {
       data: data.data,
-      totalPages: data.pagination?.total_pages || 1,
+      totalPages: data.pagination?.total_pages || PAGE_NUMBER,
     };
   } catch (error) {
     console.error('Error retrieving artworks:', error);
-    return { data: [], totalPages: 1 };
+    return { data: [], totalPages: PAGE_NUMBER };
   }
 };
