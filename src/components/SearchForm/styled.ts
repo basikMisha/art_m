@@ -50,7 +50,7 @@ export const Input = styled.input`
   color: ${colors.black};
 
   &::placeholder {
-    color: rgba(57, 57, 57, 0.5);
+    color: ${colors.searchPlaceholder};
     font-size: 14px;
     font-family: Inter;
   }
