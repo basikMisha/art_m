@@ -73,3 +73,9 @@ export const SearchIcon = styled.svg`
   fill: none;
   color: ${colors.black};
 `;
+
+export const ErrorText = styled.p`
+  color: ${colors.errorText};
+  font-size: 14px;
+  margin-top: 10px;
+`;
