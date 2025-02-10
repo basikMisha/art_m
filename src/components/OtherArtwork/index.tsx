@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Artwork } from '@/types/Artwork';
+import noImage from '@/assets/img/no-image.png';
 import {
   Card,
   StyledLink,
@@ -19,13 +20,13 @@ interface OtherArtworkProps {
 }
 
 const OtherArtwork: React.FC<OtherArtworkProps> = ({ artwork, onFavorite, isFavorite }) => {
+  const [imageSrc, setImageSrc] = useState(
+    `https://www.artic.edu/iiif/2/${artwork.image_id}/full/843,/0/default.jpg`
+  );
   return (
     <StyledLink to={`/artwork/${artwork.id}`}>
       <Card>
-        <Image
-          src={`https://www.artic.edu/iiif/2/${artwork.image_id}/full/843,/0/default.jpg`}
-          alt={artwork.title}
-        />
+        <Image src={imageSrc} alt={artwork.title} onError={() => setImageSrc(noImage)} />
         <Info>
           <Title>
             {artwork.title.length > 15 ? artwork.title.substring(0, 15) + '...' : artwork.title}
