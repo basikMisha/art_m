@@ -1,12 +1,5 @@
 import { BurgerMenu } from '../BurgerMenu';
-import {
-  StyledHeader,
-  Container,
-  LinkWrapper,
-  StyledSpan,
-  StyledLink,
-  LinksContainer,
-} from './styled';
+import { StyledHeader, Container, LinkWrapper, StyledSpan, StyledLink, Nav } from './styled';
 import { Link, useLocation } from 'react-router-dom';
 import { ROUTES } from '@/constants/routes';
 export const Header = () => {
@@ -75,7 +68,7 @@ export const Header = () => {
             />
           </svg>
         </Link>
-        <LinksContainer>
+        <Nav>
           {location.pathname !== ROUTES.HOME && (
             <StyledLink to={ROUTES.HOME}>
               <LinkWrapper>
@@ -156,7 +149,7 @@ export const Header = () => {
               <StyledSpan>Your favorites</StyledSpan>
             </LinkWrapper>
           </StyledLink>
-        </LinksContainer>
+        </Nav>
         <BurgerMenu />
       </Container>
     </StyledHeader>

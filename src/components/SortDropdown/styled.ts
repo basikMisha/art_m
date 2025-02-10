@@ -26,6 +26,6 @@ export const StyledSelect = styled.select`
   &:focus {
     outline: none;
     border-color: ${colors.orange};
-    box-shadow: 0 0 5px rgba(224, 164, 73, 0.5);
+    box-shadow: 0 0 5px ${colors.sortBoxShadow};
   }
 `;
