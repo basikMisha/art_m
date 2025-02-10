@@ -2,10 +2,22 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Container, Title, SearchWrapper, Input, SearchButton, SearchIcon } from './styled';
+import {
+  Container,
+  Title,
+  SearchWrapper,
+  Input,
+  SearchButton,
+  SearchIcon,
+  ErrorText,
+} from './styled';
 
 const schema = z.object({
-  query: z.string().min(0),
+  query: z
+    .string()
+    .regex(/^[A-Za-z\s]+$/, 'Only letters and spaces are allowed')
+    .max(100, 'Search query is too long (max 100 characters)')
+    .trim(),
 });
 
 interface SearchFormProps {
@@ -13,7 +25,11 @@ interface SearchFormProps {
 }
 
 const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
-  const { register, handleSubmit } = useForm<{ query: string }>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<{ query: string }>({
     resolver: zodResolver(schema),
   });
 
@@ -28,7 +44,11 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
       </Title>
       <form onChange={handleSubmit(onSubmit)}>
         <SearchWrapper>
-          <Input {...register('query')} placeholder="Search Art, Artist, Work..." />
+          <Input
+            {...register('query')}
+            placeholder="Search Art, Artist, Work..."
+            aria-invalid={errors.query ? 'true' : 'false'}
+          />
           <SearchButton type="submit">
             <SearchIcon viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
               <g clipPath="url(#clip1_112)">
@@ -59,6 +79,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
             </SearchIcon>
           </SearchButton>
         </SearchWrapper>
+        {errors.query && <ErrorText>{errors.query.message}</ErrorText>}
       </form>
     </Container>
   );
