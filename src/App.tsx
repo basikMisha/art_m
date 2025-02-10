@@ -1,4 +1,4 @@
-import ArtworkDetails from '@/components/AtrworkDetails';
+import ArtworkDetails from '@/pages/AtrworkDetails';
 import Layout from '@/components/Layout';
 import Favorites from '@/pages/Favorites';
 import Home from '@/pages/Home';
