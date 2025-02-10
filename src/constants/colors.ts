@@ -7,4 +7,5 @@ export const colors = {
   white: 'rgba(255, 255, 255, 1)',
   gray: 'rgba(249, 249, 249, 1)',
   search: 'rgba(57, 57, 57, 0.05)',
+  errorText: 'rgba(255, 0, 0, 1)',
 };
