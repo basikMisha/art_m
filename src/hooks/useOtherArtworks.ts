@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { fetchOtherArtworks, Artwork } from '@/api/index';
-
+import { fetchOtherArtworks } from '@/api/index';
+import { Artwork } from '@/types/Artwork';
 export const useOtherArtworks = (page: number) => {
   const [others, setOthers] = useState<Artwork[]>([]);
   const [loading, setLoading] = useState(false);

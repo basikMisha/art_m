@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Artwork } from '@/api/index';
+import { Artwork } from '@/types/Artwork';
 
 export const useSortedArtworks = (artworks: Artwork[], sortOption: string) => {
   return useMemo(() => {

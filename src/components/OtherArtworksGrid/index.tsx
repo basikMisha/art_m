@@ -1,6 +1,6 @@
 import React from 'react';
 import OtherArtwork from '../OtherArtwork';
-import { Artwork } from '@/api/index';
+import { Artwork } from '@/types/Artwork';
 import { Grid } from './styled';
 interface OtherArtworksGridProps {
   artworks: Artwork[];
