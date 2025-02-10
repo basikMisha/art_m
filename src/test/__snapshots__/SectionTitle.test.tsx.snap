@@ -1,0 +1,20 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`SectionTitle > корректно рендерится без ошибок 1`] = `
+<div>
+  <div
+    class="sc-KXCwU dmAaJW"
+  >
+    <p
+      class="sc-gyycJP fBxZrG"
+    >
+      Test Subtitle
+    </p>
+    <h2
+      class="sc-eaUbBy bAedUc"
+    >
+      Test Title
+    </h2>
+  </div>
+</div>
+`;
