@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { colors } from '@/constants/colors';
 import { Link } from 'react-router-dom';
+
 export const StyledHeader = styled.header`
   width: 100%;
   background-color: ${colors.black};
@@ -37,7 +38,7 @@ export const StyledLink = styled(Link)`
   display: block;
 `;
 
-export const LinksContainer = styled.div`
+export const Nav = styled.div`
   display: flex;
   gap: 16px;
   align-items: center;
