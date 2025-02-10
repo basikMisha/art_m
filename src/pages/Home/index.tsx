@@ -1,79 +1,34 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { Artwork, fetchArtworks, fetchOtherArtworks } from '@/api/index';
+import React, { useState, useRef, useEffect } from 'react';
 import ArtworkGrid from '@components/ArtworkGrid';
 import Pagination from '@/components/Pagination';
 import Loader from '@/components/Loader';
 import { useFavorites } from '@/context/FavoritesContext';
-import { useDebounce } from '@/hooks/useDebounce';
 import SearchForm from '@/components/SearchForm';
 import SortDropdown from '@/components/SortDropdown';
 import OtherArtworksGrid from '@/components/OtherArtworksGrid';
 import SectionTitle from '@/components/Title';
+import { useArtworks } from '@/hooks/useArtworks';
+import { useOtherArtworks } from '@/hooks/useOtherArtworks';
+import { useSortedArtworks } from '@/hooks/useSortedArtworks';
+
 const Home: React.FC = () => {
-  const [artworks, setArtworks] = useState<Artwork[]>([]);
   const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [loading, setLoading] = useState(false);
-  const { favorites, toggleFavorite } = useFavorites();
   const [searchQuery, setSearchQuery] = useState('');
-  const debouncedSearchQuery = useDebounce(searchQuery, 1000);
   const [sortOption, setSortOption] = useState<string>('alphabetical');
-  const [others, setOthers] = useState<Artwork[]>([]);
+  const { favorites, toggleFavorite } = useFavorites();
+
+  const { artworks, totalPages, loading: artworksLoading } = useArtworks(page, searchQuery);
+  const { others, loading: othersLoading } = useOtherArtworks(page);
+  const sortedArtworks = useSortedArtworks(artworks, sortOption);
+
+  const gridRef = useRef<HTMLDivElement>(null);
   const [gridHeight, setGridHeight] = useState(0);
+
   useEffect(() => {
-    if (artworks.length > 0) {
-      const gridElement = document.getElementById('artwork-grid');
-      if (gridElement) {
-        setGridHeight(gridElement.clientHeight); // Сохраняем текущую высоту
-      }
+    if (gridRef.current) {
+      setGridHeight(gridRef.current.clientHeight);
     }
-  }, [page]);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const { data, totalPages } = await fetchOtherArtworks();
-        setOthers(data);
-        setTotalPages(totalPages);
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [page]);
-  useEffect(() => {
-    const loadArtworks = async () => {
-      setLoading(true);
-      try {
-        const { data, totalPages } = await fetchArtworks(page, debouncedSearchQuery);
-        setArtworks(data);
-        setTotalPages(totalPages);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadArtworks();
-  }, [page, debouncedSearchQuery]);
-
-  const sortArtworks = (artworks: Artwork[], option: string): Artwork[] => {
-    switch (option) {
-      case 'alphabetical':
-        return [...artworks].sort((a, b) => a.title.localeCompare(b.title));
-      case 'date':
-        return [...artworks].sort(
-          (a, b) => new Date(a.date_display).getTime() - new Date(b.date_display).getTime()
-        );
-      default:
-        return artworks;
-    }
-  };
-  const sortedArtworks = useMemo(() => sortArtworks(artworks, sortOption), [artworks, sortOption]);
+  }, [page, artworks]);
 
   return (
     <>
@@ -84,23 +39,26 @@ const Home: React.FC = () => {
         }}
       />
 
-      {loading ? (
+      {artworksLoading ? (
         <Loader />
       ) : (
         <>
           <SectionTitle subtitle="Topics for you" title="Our special gallery" />
           <SortDropdown onSortChange={setSortOption} />
-          <ArtworkGrid
-            minHeight={gridHeight}
-            artworks={sortedArtworks}
-            onFavorite={toggleFavorite}
-            favorites={favorites}
-          />
+          <div ref={gridRef}>
+            <ArtworkGrid
+              minHeight={gridHeight}
+              artworks={sortedArtworks}
+              onFavorite={toggleFavorite}
+              favorites={favorites}
+            />
+          </div>
         </>
       )}
 
       <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />
-      {loading ? (
+
+      {othersLoading ? (
         <Loader />
       ) : (
         <>
